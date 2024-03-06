@@ -1,7 +1,9 @@
 from django.db import models
+from django.core.validators import MaxValueValidator , MinValueValidator
 
 class Book(models.Model):
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=20, validators=[MaxValueValidator(25)])
+
     description = models.TextField()
     price = models.FloatField()
     caunt =models.IntegerField()
@@ -21,6 +23,6 @@ class Bookingbook(models.Model):
     book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     talked_data = models.DateTimeField()
-
+    returned = models.DateTimeField(null=True)
 
 
